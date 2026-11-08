@@ -1,0 +1,27 @@
+{
+    "name": "flareia/php-sdk",
+    "version": "0.1.0",
+    "description": "Report exceptions from plain PHP applications to FlareIA.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://flareia.com.br",
+    "authors": [
+        {
+            "name": "FlareIA",
+            "homepage": "https://flareia.com.br"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/flareia/flareia-php-sdk"
+    },
+    "require": {
+        "php": "^8.2",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FlareIA\\Sdk\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
