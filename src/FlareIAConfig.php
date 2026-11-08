@@ -2,6 +2,8 @@
 
 namespace FlareIA\Sdk;
 
+use FlareIA\Sdk\Support\SecureBaseUrl;
+
 final class FlareIAConfig
 {
     public function __construct(
@@ -19,7 +21,7 @@ final class FlareIAConfig
     {
         $baseUrl = getenv('FLAREIA_BASE_URL') ?: 'https://flareia.com.br';
 
-        return new self(apiKey: $apiKey, baseUrl: $baseUrl);
+        return new self(apiKey: $apiKey, baseUrl: SecureBaseUrl::validate($baseUrl));
     }
 
     public function useDefaults(): self

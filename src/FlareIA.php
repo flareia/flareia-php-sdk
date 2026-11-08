@@ -5,6 +5,7 @@ namespace FlareIA\Sdk;
 use FlareIA\Sdk\AttributesProviders\PhpRequestAttributesProvider;
 use FlareIA\Sdk\Sampling\RateSampler;
 use FlareIA\Sdk\Senders\CurlSender;
+use FlareIA\Sdk\Support\SecureBaseUrl;
 use FlareIA\Sdk\Support\StacktraceBuilder;
 use Throwable;
 
@@ -99,9 +100,11 @@ class FlareIA
     private function resolveBaseUrl(): string
     {
         if ($this->config->useDaemon) {
-            return getenv('FLAREIA_DAEMON_URL') ?: 'http://127.0.0.1:8787';
+            $daemon = getenv('FLAREIA_DAEMON_URL') ?: 'http://127.0.0.1:8787';
+
+            return SecureBaseUrl::validate($daemon);
         }
 
-        return $this->config->baseUrl;
+        return SecureBaseUrl::validate($this->config->baseUrl);
     }
 }

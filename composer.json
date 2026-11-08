@@ -1,6 +1,6 @@
 {
     "name": "flareia/php-sdk",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Report exceptions from plain PHP applications to FlareIA.",
     "type": "library",
     "license": "MIT",

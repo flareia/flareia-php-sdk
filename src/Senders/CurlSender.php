@@ -2,6 +2,8 @@
 
 namespace FlareIA\Sdk\Senders;
 
+use FlareIA\Sdk\Support\SecureBaseUrl;
+
 class CurlSender implements Sender
 {
     public function __construct(
@@ -10,6 +12,16 @@ class CurlSender implements Sender
 
     public function post(string $endpoint, string $apiKey, array $payload): void
     {
+        $endpointParts = parse_url($endpoint);
+
+        if ($endpointParts !== false && isset($endpointParts['scheme'], $endpointParts['host'])) {
+            $origin = $endpointParts['scheme'].'://'.$endpointParts['host'];
+            if (isset($endpointParts['port'])) {
+                $origin .= ':'.$endpointParts['port'];
+            }
+            SecureBaseUrl::validate($origin);
+        }
+
         $ch = curl_init($endpoint);
 
         if ($ch === false) {
