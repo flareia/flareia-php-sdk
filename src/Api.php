@@ -40,6 +40,14 @@ class Api
         $this->sender->post($this->endpoint('/api/v1/logs'), $this->apiKey, $resourceLogsEnvelope);
     }
 
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    public function sendSecurity(array $payload): void
+    {
+        $this->sender->post($this->endpoint('/api/v1/security'), $this->apiKey, $payload);
+    }
+
     private function endpoint(string $path): string
     {
         return rtrim($this->baseUrl, '/').$path;
